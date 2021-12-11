@@ -6,14 +6,14 @@ class App extends Component {
     searchValue: '',
   };
 
-  handleOnChange = e => {
-    this.setState({ searchValue: e.target.value });
+  handleSubmit = searchValue => {
+    this.setState({ searchValue });
   };
 
   render() {
     return (
       <>
-        <Searchbar onChange={this.handleOnChange} />
+        <Searchbar onSubmitGet={this.handleSubmit} />
       </>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import ImageGallery from './components/ImageGallery/ImageGallery';
 import Searchbar from './components/Searchbar/Searchbar';
+import ImageGallery from './components/ImageGallery/ImageGallery';
+// import ImageGalleryItem from './components/ImageGallery/ImageGalleryItem/ImageGalleryItem';
 
 class App extends Component {
   state = {
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmitGet={this.handleSubmit} />
-        <ImageGallery></ImageGallery>
+        <ImageGallery />
       </>
     );
   }

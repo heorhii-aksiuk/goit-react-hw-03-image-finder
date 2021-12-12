@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 
-export class ImageGallery extends Component {
+class ImageGallery extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(
       PropTypes.shape({

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 class ImageGalleryItem extends Component {
-  static propTypes = {};
+  static propTypes = {
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+  };
 
   render() {
-    const { id, webformatURL, largeImageURL } = this.props;
+    const { webformatURL, largeImageURL } = this.props;
     return (
-      <li key={id} className="gallery-item">
+      <li className="gallery-item">
         <img src={webformatURL} alt={largeImageURL} />
       </li>
     );

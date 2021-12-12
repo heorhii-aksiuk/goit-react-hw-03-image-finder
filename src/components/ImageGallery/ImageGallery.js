@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImageGalleryItem from './components/ImageGallery/ImageGalleryItem/ImageGalleryItem';
+import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 
 export class ImageGallery extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        webformatURL: PropTypes.string.isRequired,
-        largeImageURL: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }),
     ),
   };
@@ -19,7 +17,7 @@ export class ImageGallery extends Component {
       <ul>
         {items.map(item => (
           <ImageGalleryItem
-            id={item.id}
+            key={item.id}
             webformatURL={item.webformatURL}
             largeImageURL={item.largeImageURL}
           />

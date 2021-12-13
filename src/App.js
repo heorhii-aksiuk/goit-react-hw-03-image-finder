@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
+import Loader from 'react-loader-spinner';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import apiService from './services/apiService';
 import Button from './components/Button/Button';
 
-// const apiSevice = new ApiService();
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
 
 class App extends Component {
   state = {
     searchValue: '',
-    items: null,
     page: 1,
+    items: null,
+    error: null,
+    status: Status.IDLE,
   };
 
   handleSubmit = searchValue => {
@@ -33,26 +41,55 @@ class App extends Component {
     if (currentRequest === '') {
       return;
     } else if (currentRequest !== prevRequest) {
-      this.setState({ page: firstPage, items: null });
+      this.setState({
+        page: firstPage,
+        items: null,
+        status: Status.PENDING,
+      });
       apiService(currentRequest, firstPage)
-        .then(items => this.setState({ items }))
-        .catch(console.log);
+        .then(items =>
+          this.setState({
+            items,
+            status: Status.RESOLVED,
+          }),
+        )
+        .catch(error =>
+          this.setState({
+            error,
+            status: Status.REJECTED,
+          }),
+        );
     } else if (currentPage !== firstPage && currentPage !== prevPage) {
       apiService(currentRequest, currentPage)
         .then(newItems =>
-          this.setState({ items: [...this.state.items, ...newItems] }),
+          this.setState({
+            items: [...this.state.items, ...newItems],
+            status: Status.RESOLVED,
+          }),
         )
-        .catch(console.log);
+        .catch(error =>
+          this.setState({
+            error,
+            status: Status.REJECTED,
+          }),
+        );
     }
   }
 
   render() {
-    const { items } = this.state;
+    const { items, status } = this.state;
     return (
       <>
         <Searchbar onSubmitGet={this.handleSubmit} />
         {items && <ImageGallery items={items} />}
-        <Button loadMore={this.handleLoadMore} />
+
+        {status === Status.PENDING && (
+          <Loader type="Oval" color="#00BFFF" height={100} width={100} />
+        )}
+
+        {status === Status.RESOLVED && (
+          <Button loadMore={this.handleLoadMore} />
+        )}
       </>
     );
   }

@@ -6,6 +6,7 @@ import apiService from './services/apiService';
 import Button from './components/Button/Button';
 import Modal from './components/Modal/Modal';
 import s from './App.module.css';
+import FallbackContainer from './components/FallbackContainer/FallbackContainer';
 
 const Status = {
   IDLE: 'idle',
@@ -103,7 +104,9 @@ class App extends Component {
         {items && <ImageGallery items={items} showFull={this.showLargeImage} />}
 
         {status === Status.PENDING && (
-          <Loader type="Oval" color="#00BFFF" height={100} width={100} />
+          <FallbackContainer>
+            <Loader type="Oval" color="#00BFFF" height={150} width={150} />
+          </FallbackContainer>
         )}
 
         {status === Status.RESOLVED && (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { BsSearch } from 'react-icons/bs';
 import s from './Searchbar.module.css';
 
 class Searchbar extends Component {
@@ -27,7 +28,7 @@ class Searchbar extends Component {
       <header className={s.searchbar}>
         <form className={s.form} onSubmit={this.handleSubmit}>
           <button type="submit" className={s.button}>
-            <span className={s.buttonLabel}>Search</span>
+            <BsSearch />
           </button>
           <input
             onChange={this.handleChange}

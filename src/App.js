@@ -4,6 +4,7 @@ import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import apiService from './services/apiService';
 import Button from './components/Button/Button';
+import Modal from './components/Modal/Modal';
 
 const Status = {
   IDLE: 'idle',
@@ -19,16 +20,8 @@ class App extends Component {
     items: null,
     error: null,
     status: Status.IDLE,
-  };
-
-  handleSubmit = searchValue => {
-    this.setState({ searchValue });
-  };
-
-  handleLoadMore = () => {
-    this.setState(state => ({
-      page: state.page + 1,
-    }));
+    showModal: false,
+    largeImage: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -76,12 +69,37 @@ class App extends Component {
     }
   }
 
+  handleSubmit = searchValue => {
+    this.setState({ searchValue });
+  };
+
+  handleLoadMore = () => {
+    this.setState(state => ({
+      page: state.page + 1,
+    }));
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
+  showLargeImage = largeImage => {
+    this.setState({ largeImage });
+    this.toggleModal();
+  };
+
   render() {
-    const { items, status } = this.state;
+    const { items, status, showModal, largeImage } = this.state;
     return (
       <>
+        {showModal && (
+          <Modal>
+            <img src={largeImage} alt="Full size" />
+          </Modal>
+        )}
+
         <Searchbar onSubmitGet={this.handleSubmit} />
-        {items && <ImageGallery items={items} />}
+        {items && <ImageGallery items={items} showFull={this.showLargeImage} />}
 
         {status === Status.PENDING && (
           <Loader type="Oval" color="#00BFFF" height={100} width={100} />

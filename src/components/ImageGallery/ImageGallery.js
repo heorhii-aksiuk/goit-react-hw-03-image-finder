@@ -12,14 +12,16 @@ class ImageGallery extends Component {
   };
 
   render() {
-    const { items } = this.props;
+    const { items, showFull } = this.props;
     return (
       <ul>
         {items.map(item => (
           <ImageGalleryItem
             key={item.id}
+            showFull={showFull}
             webformatURL={item.webformatURL}
             largeImageURL={item.largeImageURL}
+            tags={item.tags}
           />
         ))}
       </ul>

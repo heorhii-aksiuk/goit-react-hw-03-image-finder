@@ -8,10 +8,14 @@ class ImageGalleryItem extends Component {
   };
 
   render() {
-    const { webformatURL, largeImageURL } = this.props;
+    const { webformatURL, largeImageURL, showFull, tags } = this.props;
     return (
       <li className="gallery-item">
-        <img src={webformatURL} alt={largeImageURL} />
+        <img
+          onClick={() => showFull(largeImageURL)}
+          src={webformatURL}
+          alt={tags}
+        />
       </li>
     );
   }

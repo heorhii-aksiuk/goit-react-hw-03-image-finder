@@ -5,6 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import apiService from './services/apiService';
 import Button from './components/Button/Button';
 import Modal from './components/Modal/Modal';
+import s from './App.module.css';
 
 const Status = {
   IDLE: 'idle',
@@ -91,7 +92,7 @@ class App extends Component {
   render() {
     const { items, status, showModal, largeImage } = this.state;
     return (
-      <>
+      <div className={s.app}>
         {showModal && (
           <Modal>
             <img src={largeImage} alt="Full size" />
@@ -108,7 +109,7 @@ class App extends Component {
         {status === Status.RESOLVED && (
           <Button loadMore={this.handleLoadMore} />
         )}
-      </>
+      </div>
     );
   }
 }

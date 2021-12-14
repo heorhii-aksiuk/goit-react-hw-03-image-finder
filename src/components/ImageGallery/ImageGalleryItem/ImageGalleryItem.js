@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import s from './ImageGalleryItem.module.css';
 
 class ImageGalleryItem extends Component {
   static propTypes = {
@@ -10,8 +11,9 @@ class ImageGalleryItem extends Component {
   render() {
     const { webformatURL, largeImageURL, showFull, tags } = this.props;
     return (
-      <li className="gallery-item">
+      <li className={s.item}>
         <img
+          className={s.image}
           onClick={() => showFull(largeImageURL)}
           src={webformatURL}
           alt={tags}

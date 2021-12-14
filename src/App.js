@@ -95,7 +95,7 @@ class App extends Component {
     return (
       <div className={s.app}>
         {showModal && (
-          <Modal>
+          <Modal closeModal={this.toggleModal}>
             <img src={largeImage} alt="Full size" />
           </Modal>
         )}

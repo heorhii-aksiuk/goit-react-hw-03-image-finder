@@ -3,9 +3,9 @@ import s from './Modal.module.css';
 
 export default class Modal extends Component {
   render() {
-    const { children } = this.props;
+    const { closeModal, children } = this.props;
     return (
-      <div className={s.overlay}>
+      <div onClick={closeModal} className={s.overlay}>
         <div className={s.modal}>{children}</div>
       </div>
     );
